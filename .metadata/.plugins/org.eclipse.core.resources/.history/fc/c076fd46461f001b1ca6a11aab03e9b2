@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+div>input, h4, p {
+	display: inline-block;
+}
+</style>
+</head>
+<body>
+	<form action="joinServlet" method="post">
+		<div>	
+			<h4>이름 :</h4>
+			<input type="text" name="name">
+		</div>
+		<div>
+			<h4>성별 :</h4>
+			<select name="gender" class="identify">
+				<option value="남자">남자</option>
+				<option value="여자">여자</option>
+			</select>
+		</div>
+		<div>
+			<h4>아이디 :</h4>
+			<input type="text" name="id">
+		</div>
+		<div>
+			<h4>비밀번호 :</h4>
+			<input type="password" name="password" id="password">
+		</div>
+		<div>
+			<h4>비밀번호 확인 :</h4>
+			<input type="password" name="passwordCheck" id="passwordCheck">
+		</div>
+		<div>
+			<h4>주소 :</h4>
+			<input type="text" name="address">
+		</div>
+		<div>
+			<h4>전화번호 :</h4>
+			<input type="text" name="phoneNumber">
+		</div>
+		<div>
+			<h4>이메일 :</h4>
+			<input type="text" name="email">
+		</div>
+		<div>
+			<h4>취미 :</h4>
+			<p>축구</p>
+			<input type="checkbox" name="hobby" value="축구">
+			<p>게임</p>
+			<input type="checkbox" name="hobby" value="게임">
+			<p>야구</p>
+			<input type="checkbox" name="hobby" value="야구">
+			<p>농구</p>
+			<input type="checkbox" name="hobby" value="농구">
+			<p>유튜브시청</p>
+			<input type="checkbox" name="hobby" value="유튜브시청">
+		</div>
+		<button id="submit" >회원가입</button>
+	</form>
+	<script>
+        let submit = document.getElementById('submit');
+        submit.addEventListener('click', function () {
+            let password = document.getElementById('password').value;
+            let passwordCheck = document.getElementById('passwordCheck').value;
+            if(password != passwordCheck) {
+            	alert("비밀번호가 맞지 않습니다.");
+            } else {
+            	submit();
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+package com.grganzy.www.DBManager;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+
+import com.grganzy.www.Member.Member;
+
+public class DBManager {
+
+	public void insert(Member member) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+
+			conn = DriverManager.getConnection("oracle:jdbc:@192.168.0.90:1521:xe", "scott", "1234");
+			pstmt = conn.prepareStatement("insert into memberchap04gr"
+					+ "(NAME, GENDER, ID, PASSWORD, ADDRESS, PHONE, EMAIL, HOBBY, REGDATE, IDX) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, sysdate, (select nvl(max(idx)+1,1) from memberchap04gr))");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+
+			} catch (Exception e) {
+
+			}
+		}
+	}
+}

@@ -1,0 +1,28 @@
+package com.grganzy.www.DBManager;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+
+import com.grganzy.www.Member.Member;
+
+public class DBManager {
+	
+	public void insert(Member member) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			conn = 	
+		} catch(Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				
+			} catch (Exception e) {
+				
+			}
+		}
+	}
+}

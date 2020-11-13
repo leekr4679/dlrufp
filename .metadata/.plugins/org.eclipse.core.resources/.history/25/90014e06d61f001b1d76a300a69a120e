@@ -1,0 +1,107 @@
+package com.grganzy2.www;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+
+import com.grganzy2.www.src.Member;
+
+public class DBManager {
+
+	public void insert(Member member) {
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.90:1521:xe", "t", "1234");
+			pstmt = conn.prepareStatement("INSERT INTO memberchap04gr2 "
+					+ "(NAME, GENDER, ID, PASSWORD, ADDRESS, PHONE, EMAIL, HOBBY, REGDATE) "
+					+ "VALUES (?, ?, ?, ?, ?, ?, ?, ?, sysdate)");
+			pstmt.setString(1, member.getName());
+			pstmt.setString(2, member.getGender());
+			pstmt.setString(3, member.getId());
+			pstmt.setString(4, member.getPassword());
+			pstmt.setString(5, member.getAddress());
+			pstmt.setString(6, member.getPhone());
+			pstmt.setString(7, member.getEmali());
+			pstmt.setString(8, member.getHobbyArray());
+			pstmt.executeUpdate();
+			System.out.println("완료");
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if (pstmt != null) {
+					pstmt.close();
+				}
+				if (conn != null) {
+					conn.close();
+				}
+			} catch (Exception e) {
+			}
+		}
+	}
+
+	public ArrayList<Member> select() {
+
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		ResultSet rs = null; // select 해서 반환되는 table 내용 담는 객체
+		
+		ArrayList<Member> al = new ArrayList<Member>(); // rs 내용을 바꿔서 ArrayList에 담는 객체
+
+		try {
+			Class.forName("oracle.jdbc.driver.OracleDriver");
+			
+			conn = DriverManager.getConnection("jdbc:oracle:thin:@192.168.0.90:1521:xe", "scott", "1234");
+			pstmt = conn.prepareStatement("select * from MEMBERCHAP04GR2 order by regdate desc");
+			//select -> executeQuery();
+			//insert OR update OR delete -> executeUpdate();
+			rs = pstmt.executeQuery();
+			
+			int i = 1;
+			while(rs.next()) { // 다음 행이 있으면 true 없으면 false
+				//System.out.println(i++);
+				Member temp = new Member();
+				temp.setAddress(rs.getString("address"));
+				temp.setPassword(rs.getString("password"));
+				temp.setEmali(rs.getString("email"));
+				temp.setHobbyArray(rs.getString("hobbyArray"));
+				temp.setName(rs.getString("name"));
+				temp.setId(rs.getString("id"));
+				temp.setPhone(rs.getString("phone"));
+				temp.setPasswordCheck("passwordCheck");
+				
+				System.out.println(temp);
+				al.add(temp);
+			}
+;		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				if(rs != null) {
+					rs.close();
+				}
+				
+				if(conn != null) {
+					conn.close();
+				}
+				
+				if(pstmt != null) {
+					pstmt.close();
+				}
+			} catch(Exception e) {
+			}
+		}
+		return null;
+	}
+	
+	public void defualt() {
+		
+	}
+}

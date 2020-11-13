@@ -1,0 +1,49 @@
+<%@page import="com.grganzy2.www.src.Member"%>
+<%@page import="java.util.ArrayList"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+</head>
+<body>
+	<a href="index.html">메인화면</a>
+	<p>회원목록</p>
+	<table border = "1"> 	
+		<tr style="width= 50px;">
+			<th style="width= 50px;">이름</th>
+			<th style="width= 50px;">성별</th>
+			<th style="width= 50px;">아이디</th>
+			<th style="width= 50px;">비밀번호</th>
+			<th style="width= 50px;">주소</th>
+			<th style="width= 50px;">연락처</th>
+			<th style="width= 50px;">이메일</th>
+			<th style="width= 50px;">취미</th>
+			<th style="width= 50px;">가입일자</th>
+		</tr>
+		<%
+			ArrayList<Member> al = (ArrayList<Member>) request.getAttribute("list");
+		for (int i = 0; i < al.size(); i++) {
+		%>
+		<tr>
+			<%
+				out.println("<td>" + al.get(i).getName() + "</td>");
+				out.println("<td>" + al.get(i).getGender() + "</td>");
+				out.println("<td>" + al.get(i).getId() + "</td>");
+				out.println("<td>" + al.get(i).getPassword() + "</td>");
+				out.println("<td>" + al.get(i).getAddress() + "</td>");
+				out.println("<td>" + al.get(i).getPhone() + "</td>");
+				out.println("<td>" + al.get(i).getEmali() + "</td>");
+				out.println("<td>" + al.get(i).getHobbyArray() + "</td>");
+				out.println("<td>" + al.get(i).getRegdate() + "</td>");
+			%>
+		</tr>
+		<%
+			}
+		%>
+	</table>
+</body>
+</html>

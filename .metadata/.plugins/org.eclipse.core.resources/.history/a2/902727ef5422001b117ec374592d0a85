@@ -1,0 +1,7 @@
+package com.grganzy.www.Member;
+
+public class Member {
+	private String idx;
+	private String name;
+	private String 
+}

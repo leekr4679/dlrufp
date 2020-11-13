@@ -1,0 +1,16 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<%
+	if(password.length() <5 && passwordCheck.length() < 5) {
+		out.print("<script>alert(\"비밀번호는 5글자 이상이어야 합니다.\");</script>");
+	}
+%>
+</body>
+</html>
